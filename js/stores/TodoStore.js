@@ -30,8 +30,20 @@ function updateAll(updates) {
     }
 }
 
+//The for realz destroy
+// function destroy(id) {
+//     delete _todos[id];
+// }
+
+//fake destroy :D
 function destroy(id) {
-    delete _todos[id];
+    var newText = _todos[id].text + ' DONE :DDDD';
+    _todos[id] = merge(_todos[id], 
+        {
+            text: newText,
+            appearance: {visibility: 'hidden'}
+        }
+    );
 }
 
 

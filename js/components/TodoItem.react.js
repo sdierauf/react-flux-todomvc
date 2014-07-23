@@ -20,7 +20,7 @@ var TodoItem = React.createClass({
                 <label>
                     {todo.text}
                 </label>
-                <button className="destroy" onClick={this._onDestroyClick} />
+                <button className="destroy" onClick={this._onDestroyClick} style={this.props.todo.appearance}/>
             </li>
         );
     },
