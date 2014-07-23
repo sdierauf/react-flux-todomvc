@@ -57,7 +57,7 @@ var TodoStore = merge(EventEmitter.prototype, {
     },
 
     getAll: function() {
-        reutn _todos;
+        return _todos;
     },
 
     emitChange: function() {
