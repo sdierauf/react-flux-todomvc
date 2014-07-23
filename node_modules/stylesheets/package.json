@@ -12,7 +12,7 @@
     "jsdom": "~0.8.10"
   },
   "peerDependencies": {
-    "envify": "~0.2.0"
+    "envify": "~1.2.0"
   },
   "repository": {
     "type": "git",
