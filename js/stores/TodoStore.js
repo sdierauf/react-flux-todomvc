@@ -15,6 +15,7 @@ function create(text) {
     _todos[id] = {
         id: id,
         complete: false,
+        happy: false,
         text: text
     };
 
@@ -31,20 +32,20 @@ function updateAll(updates) {
 }
 
 //The for realz destroy
-// function destroy(id) {
-//     delete _todos[id];
-// }
+function destroy(id) {
+    delete _todos[id];
+}
 
 //fake destroy :D
-function destroy(id) {
-    var newText = _todos[id].text + ' DONE :DDDD';
-    _todos[id] = merge(_todos[id], 
-        {
-            text: newText,
-            appearance: {visibility: 'hidden'}
-        }
-    );
-}
+// function destroy(id) {
+//     var newText = _todos[id].text + ' DONE :DDDD';
+//     _todos[id] = merge(_todos[id], 
+//         {
+//             text: newText,
+//             appearance: {visibility: 'hidden'}
+//         }
+//     );
+// }
 
 
 function destroyCompleted() {
@@ -52,6 +53,13 @@ function destroyCompleted() {
         if (_todos[id].complete) {
             destroy(id);
         }    
+    }
+}
+
+function destroyAll() {
+    console.log('called destroy all in todostore');
+    for (var id in _todos) {
+        destroy(id);
     }
 }
 
@@ -66,6 +74,22 @@ var TodoStore = merge(EventEmitter.prototype, {
             }
         }
         return true;
+    },
+
+    areAllHappy: function() {
+        for (id in _todos) {
+            if (!_todos[id].happy) {
+                return false;
+                break;
+            }
+        }
+        return true;
+    },
+
+    checkboxTest: function() {
+        return {
+            shouldBeChecked: false
+        }
     },
 
     getAll: function() {
@@ -92,7 +116,10 @@ AppDispatcher.register(function(payload) {
     var action = payload.action;
     var text;
 
+    console.log(action.actionType);
+
     switch(action.actionType) {
+
         case TodoConstants.TODO_CREATE:
             text = action.text.trim();
             if (text !== '') {
@@ -131,8 +158,21 @@ AppDispatcher.register(function(payload) {
             destroyCompleted();
             break;
 
+        case TodoConstants.TODO_DESTROY_ALL:
+            destroyAll();
+            break;
+
+        case TodoConstants.TODO_TOGGLE_HAPPY_EVERYBODY:
+            if (TodoStore.areAllHappy()) {
+                updateAll({happy: false});
+            } else {
+                updateAll({happy: true});
+            }
+            break;
+
         default:
-        return true;
+            console.log('fell through to default');
+            return true;
     }
 
     TodoStore.emitChange();

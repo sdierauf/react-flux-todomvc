@@ -9,7 +9,8 @@ var MainSection = React.createClass({
 	
 	propTypes: {
 		allTodos: ReactPropTypes.object.isRequired,
-		areAllComplete: ReactPropTypes.bool.isRequired
+		// areAllComplete: ReactPropTypes.bool.isRequired
+		areAllHappy: ReactPropTypes.bool.isRequired
 	},
 
 	render: function() {
@@ -28,11 +29,16 @@ var MainSection = React.createClass({
 		return (
 			<section id="main">
 				<input
-					id="toggle-all"
+					id="toggle-happyface"
 					type="checkbox"
-					onChange={this._onToggleCompleteAll}
-					checked={this.props.areAllComplete ? 'checked' : ''} />
-				<label htmlFor="toggle-all">Mark all as complete</label>
+					onChange={this._onToggleHappyFace}
+					checked={this.props.areAllHappy ? 'checked' : ''} />
+				<label htmlFor="toggle-happyface">Make all of them happy</label>
+				<input
+					id="destroy-all"
+					type="button"
+					onClick={this._onDestroyAll}
+					value="remove all MUAHAHAHA" />
 				<ul id="todo-list">{todos}</ul>
 			</section>
 		);
@@ -40,6 +46,14 @@ var MainSection = React.createClass({
 
 	_onToggleCompleteAll: function() {
 		TodoActions.toggleCompleteAll();
+	},
+
+	_onDestroyAll: function() {
+		TodoActions.destroyAll();
+	},
+
+	_onToggleHappyFace: function() {
+		TodoActions.toggleHappyfaceAll();
 	}
 
 

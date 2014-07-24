@@ -13,14 +13,16 @@ var TodoItem = React.createClass({
 
     render: function() {
         var todo = this.props.todo;
-
         return (
             <li
                 key={todo.id}>
                 <label>
-                    {todo.text}
+                    {todo.text} 
                 </label>
-                <button className="destroy" onClick={this._onDestroyClick} style={this.props.todo.appearance}/>
+                <label>
+                    {todo.happy ? ' :D ' : ' :( '}
+                </label>
+                <button className="destroy" onClick={this._onDestroyClick} />
             </li>
         );
     },

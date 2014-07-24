@@ -35,7 +35,7 @@ Dispatcher.prototype = merge(Dispatcher.prototype, {
             });
         });
 
-        //dispatch to callbacks and resolbe/reject promises.
+        //dispatch to callbacks and resolve/reject promises.
         _callbacks.forEach(function(callback, i) {
             //calback can return obj to resolve or a promise to chain
             Promise.resolve(callback(payload)).then(function() {

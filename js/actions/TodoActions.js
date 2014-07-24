@@ -16,6 +16,20 @@ var TodoActions = {
             actionType: TodoConstants.TODO_DESTROY,
             id: id
         });
+    }, 
+
+    destroyAll: function() {
+        console.log('called destroy all');
+        AppDispatcher.handleViewAction({
+            actionType: TodoConstants.TODO_DESTROY_ALL
+        });
+    },
+
+    toggleHappyfaceAll: function() {
+        console.log('sending happyfaces to dispatcher');
+        AppDispatcher.handleViewAction({
+            actionType: TodoConstants.TODO_TOGGLE_HAPPY_EVERYBODY
+        })
     }
 
 };
